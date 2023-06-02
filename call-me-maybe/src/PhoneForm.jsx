@@ -65,6 +65,13 @@ class PhoneForm extends Component {
   }
 
   formatPhoneNumber(phoneNumber) {
+
+    // if the phone number is less then 10 digits, return the number
+
+    if (phoneNumber < 999999999) {
+      return phoneNumber;
+    }
+
     let cleaned = ('' + phoneNumber).replace(/\D/g, '');
     let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
