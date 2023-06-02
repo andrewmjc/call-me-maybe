@@ -49,6 +49,11 @@ class PhoneForm extends Component {
 
     const randomMessage = Math.floor(Math.random() * newMessage.length);
 
+    if (Math.random() < 0.2){
+      alert(newMessage[randomMessage]);
+    }
+
+
     this.setState(prevState => ({
         phoneNumber: prevState.phoneNumber - (prevState.dice[0] + prevState.dice[1]),
         dice: prevState.dice,
@@ -68,7 +73,7 @@ class PhoneForm extends Component {
   resetNumber() {
     this.setState({ 
       phoneNumber: 9999999999, 
-      dice: [1, 1],
+      dice: this.state.dice,
       newMessage: '',
     });
 
