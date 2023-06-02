@@ -10,6 +10,7 @@ class PhoneForm extends Component {
         Math.floor(Math.random() * 6) + 1,
       ],
       showGif: false,
+      message: '',
     };
 
     this.rollDice = this.rollDice.bind(this);
@@ -37,10 +38,22 @@ class PhoneForm extends Component {
   }
 
   subtractRoll() {
+    const newMessage = ['You are doing really well!', 
+      "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+      "You are capable of more than you know. Keep pushing forward, and you'll surprise yourself.",
+      "Don't be afraid to take risks and step out of your comfort zone. That's where true growth happens.",
+      "Every small step you take is progress. Celebrate your victories, no matter how small they may seem.",
+      "Remember that setbacks are just opportunities for comebacks. Keep going, and you'll come out stronger.",
+      "You have the power to create the life you want. Believe in yourself and your dreams."
+    ];
+
+    const randomMessage = Math.floor(Math.random() * newMessage.length);
+
     this.setState(prevState => ({
         phoneNumber: prevState.phoneNumber - (prevState.dice[0] + prevState.dice[1]),
         dice: prevState.dice,
         showGif: false,
+        message: newMessage[randomMessage],
       }));
   }
 
@@ -53,7 +66,12 @@ class PhoneForm extends Component {
   }
 
   resetNumber() {
-    this.setState({ phoneNumber: 9999999999, dice: [1, 1] });
+    this.setState({ 
+      phoneNumber: 9999999999, 
+      dice: [1, 1],
+      newMessage: '',
+    });
+
   }
 
   submitNumber() {
@@ -79,7 +97,7 @@ class PhoneForm extends Component {
       <div>
         {this.state.showGif && <img src="../public/dice.gif" alt="Dice gif"/>}
         {!this.state.showGif && <>
-        
+        <h3>{this.state.message}</h3>
         <h1>Your Phone Number: {this.formatPhoneNumber(this.state.phoneNumber)}</h1>
         <button onClick={this.rollDice}>Roll Dice</button>
         <button onClick={this.subtractRoll}>Subtract by roll</button>
